@@ -20,11 +20,8 @@ const Footer = () => {
             <h3>PropelFoundry</h3>
             <p>Empowering startups with mentorship, funding & global connections.</p>
             <div className="footer-social">
-              <a href="#"><FaFacebookF /></a>
-              <a href="#"><FaInstagram /></a>
-              <a href="#"><FaTwitter /></a>
-              <a href="#"><FaLinkedinIn /></a>
-              <a href="#"><FaYoutube /></a>
+              <a href="https://www.instagram.com/propelfoundry"><FaInstagram /></a>
+              <a href="https://www.linkedin.com/company/propelfoundry"><FaLinkedinIn /></a>
             </div>
           </div>
 

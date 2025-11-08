@@ -17,15 +17,15 @@
 /* ===== Left Content ===== */
 .hero-content {
   flex: 1;
-  max-width: 500px;
-  padding: 1;
+  max-width: 550px;
+  padding: 1rem;
 }
 
 .hero-heading {
-  font-size: 3.2rem;
-  font-weight: 800;
+  font-size: 3.5rem;
+  font-weight: 1000;
   line-height: 1.2;
-  color: #0048ff;
+  color: #163a95;
   margin-bottom: 1rem;
 }
 

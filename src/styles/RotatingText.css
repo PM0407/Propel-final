@@ -16,7 +16,7 @@
   display: inline-block;
   font-weight: 800;
   color: transparent;
-  background: linear-gradient(90deg, #0051ff, #f64504, #ff9a00, #007bff);
+  background:  #f64504;
   -webkit-background-clip: text;
   background-size: 300%;
   animation: rotateWord 3s cubic-bezier(0.77, 0, 0.175, 1) infinite,
