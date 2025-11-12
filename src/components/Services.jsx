@@ -1,104 +1,313 @@
 import React from "react";
 import { motion } from "framer-motion";
-import "../styles/Services.css";
 import { 
-  FaRegLightbulb, 
-  FaFileContract, 
-  FaUserTie, 
-  FaChartLine, 
-  FaBriefcase, 
-  FaChalkboardTeacher, 
-  FaUsers, 
-  FaTrophy 
-} from "react-icons/fa";
+    Box, 
+    Container, 
+    Typography, 
+    Button, 
+    Card, 
+    CardContent, 
+    Avatar, 
+    Stack, 
+    Chip, 
+    alpha, // utility for darkening/lightening colors
+    Divider // New: Used for visual separation
+} from "@mui/material";
 
-// Import Helmet for SEO meta tags
-import { Helmet } from "react-helmet-async";
+// Replaced react-icons/fa with standard Material UI Icons
+import { 
+    LightbulbOutlined, 
+    ArticleOutlined, 
+    GavelOutlined, 
+    TrendingUpOutlined, 
+    SupervisorAccountOutlined, 
+    SchoolOutlined, 
+    PeopleOutline, 
+    EmojiEventsOutlined,
+    ArrowRightAlt
+} from "@mui/icons-material";
 
+// --- BRAND COLOR PALETTE (Extracted from Logo) ---
+const BRAND = {
+    // Primary Deep Blue (for text, main buttons)
+    primary: "#121490", 
+    // Primary Accent Red/Orange (for highlights)
+    accent: "#fd3007", 
+    // Secondary Light Blue (for backgrounds, subtle elements)
+    lightBg: "#eef5ff", 
+    // A brighter blue derived from the logo's graphic trail
+    secondaryAccent: "#007bff", 
+    // New: Darker text color for high contrast and professionalism
+    textPrimaryDark: "#1a1a1a", 
+};
+
+// --- CATEGORY COLOR MAPPING for Chips ---
+const categoryColors = {
+    Strategy: { color: BRAND.secondaryAccent },
+    Legal: { color: BRAND.accent },
+    Growth: { color: BRAND.primary },
+    Support: { color: BRAND.primary },
+};
+
+// --- SERVICE DATA ---
 const servicesData = [
-  {
-    icon: <FaRegLightbulb />,
-    title: "Startup Consulting",
-    description: "Guidance on idea validation, business model, and market strategy.",
-  },
-  {
-    icon: <FaFileContract />,
-    title: "Company Registration",
-    description: "Assistance for OPC, LLP, Pvt Ltd, and Section 8 company registration.",
-  },
-  {
-    icon: <FaUserTie />,
-    title: "IPR & Compliance",
-    description: "Protect your innovations with IPR registration and legal compliance.",
-  },
-  {
-    icon: <FaChartLine />,
-    title: "Business Growth",
-    description: "Training, proposal writing, and growth strategies for your startup.",
-  },
-  {
-    icon: <FaBriefcase />,
-    title: "Mentorship",
-    description: "Connect with experienced mentors who guide you through business growth strategies.",
-  },
-  {
-    icon: <FaUsers />,
-    title: "Networking & Partnerships",
-    description: "Gain access to investors, partners, and networking events tailored for startups.",
-  },
-  {
-    icon: <FaChalkboardTeacher />,
-    title: "Training Programs",
-    description: "Learn from experts with structured training sessions and workshops.",
-  },
-  {
-    icon: <FaTrophy />,
-    title: "Winning Hackathon",
-    description: "We help startups showcase solutions and participate in hackathons for real-world impact.",
-  },
+    {
+        icon: <LightbulbOutlined />,
+        title: "Startup Consulting",
+        description: "Strategic guidance on idea validation, business modeling and go-to-market strategy.",
+        category: "Strategy"
+    },
+    {
+        icon: <ArticleOutlined />,
+        title: "Company Registration",
+        description: "End-to-end support for OPC, LLP, Pvt Ltd & Section 8 registrations.",
+        category: "Legal"
+    },
+    {
+        icon: <GavelOutlined />,
+        title: "IPR & Compliance",
+        description: "IPR filing, trademark protection and statutory compliance guidance.",
+        category: "Legal"
+    },
+    {
+        icon: <TrendingUpOutlined />,
+        title: "Business Growth",
+        description: "Growth strategy, proposal writing and investor readiness programs.",
+        category: "Growth"
+    },
+    {
+        icon: <SupervisorAccountOutlined />,
+        title: "Mentorship",
+        description: "Connect with experienced mentors for hands-on startup guidance.",
+        category: "Support"
+    },
+    {
+        icon: <PeopleOutline />,
+        title: "Networking & Partnerships",
+        description: "Access to investors, partners and curated networking opportunities.",
+        category: "Growth"
+    },
+    {
+        icon: <SchoolOutlined />,
+        title: "Training Programs",
+        description: "Practical workshops and skill development for startup teams.",
+        category: "Support"
+    },
+    {
+        icon: <EmojiEventsOutlined />,
+        title: "Hackathons & Events",
+        description: "Showcase solutions and gain traction through curated events.",
+        category: "Growth"
+    },
 ];
 
-const Services = () => {
-  return (
-    <>
-      {/* Helmet for SEO */}
-      <Helmet>
-        <title>Services | Propel Foundry Startup Consulting</title>
-        <meta
-          name="description"
-          content="Explore Propel Foundry services including startup consulting, company registration, IPR compliance, R&D training, and mentorship programs in India."
-        />
-        <meta
-          name="keywords"
-          content="startup consulting, company registration, IPR services, R&D training, mentorship programs"
-        />
-      </Helmet>
+// --- CARD COMPONENT ---
+const ServiceCard = ({ service, idx }) => {
+    const chipProps = categoryColors[service.category] || { color: BRAND.primary };
 
-      <section className="services-section" id="services">
-        <h2 className="services-heading">Our Services</h2>
-        <p className="services-subheading">
-          We provide end-to-end support for startups, from registration and mentorship to growth and networking.
-        </p>
-        <div className="services-grid">
-          {servicesData.map((service, index) => (
-            <motion.div
-              key={index}
-              className="service-card"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: idx * 0.1 }}
+        >
+            <Card
+                elevation={3} // Increased elevation slightly for better depth
+                sx={{
+                    height: '100%',
+                    background: 'white',
+                    borderRadius: 3,
+                    p: { xs: 2.5, sm: 4 },
+                    transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    border: `1px solid ${alpha(BRAND.primary, 0.05)}`,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    '&:hover': {
+                        transform: 'translateY(-8px)',
+                        boxShadow: `0 18px 50px ${alpha(BRAND.primary, 0.15)}`, // Enhanced shadow on hover
+                    },
+                }}
             >
-              <div className="service-icon">{service.icon}</div>
-              <h3 className="service-title">{service.title}</h3>
-              <p className="service-description">{service.description}</p>
-              <button className="service-button">Learn More</button>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-    </>
-  );
+                <CardContent sx={{ p: 0, '&:last-child': { pb: 0 }, flexGrow: 1 }}>
+                    <Stack spacing={2.5}>
+                        {/* Chip & Icon */}
+                        <Stack 
+                            direction="row" 
+                            alignItems="center" 
+                            justifyContent="space-between"
+                        >
+                            <Avatar
+                                sx={{
+                                    width: 64, // Slightly larger avatar
+                                    height: 64,
+                                    bgcolor: alpha(BRAND.primary, 0.08),
+                                    color: BRAND.primary,
+                                    fontSize: '2rem', // Larger icon size
+                                    transition: 'all 0.3s',
+                                    '&:hover, .MuiCard-root:hover &': {
+                                        bgcolor: BRAND.primary,
+                                        color: 'white',
+                                    }
+                                }}
+                            >
+                                {service.icon}
+                            </Avatar>
+                            <Chip
+                                label={service.category}
+                                size="small"
+                                sx={{
+                                    bgcolor: alpha(chipProps.color, 0.1),
+                                    color: chipProps.color,
+                                    fontWeight: 700, // Slightly bolder chip text
+                                    fontSize: '0.8rem',
+                                    borderRadius: 1.5,
+                                    px: 1.5,
+                                }}
+                            />
+                        </Stack>
+
+                        {/* Title & Description */}
+                        <Box mt={3} flexGrow={1}>
+                            <Typography
+                                variant="h5"
+                                sx={{
+                                    fontSize: { xs: '1.3rem', sm: '1.5rem' },
+                                    fontWeight: 700,
+                                    mb: 1.5,
+                                    color: BRAND.textPrimaryDark, // Darker title color
+                                }}
+                            >
+                                {service.title}
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    fontSize: { xs: '0.95rem', sm: '1rem' },
+                                    color: 'text.secondary',
+                                    lineHeight: 1.6,
+                                }}
+                            >
+                                {service.description}
+                            </Typography>
+                        </Box>
+                    </Stack>
+                </CardContent>
+                
+                {/* Action Button */}
+                <Button
+                    endIcon={<ArrowRightAlt />}
+                    sx={{
+                        mt: 3,
+                        alignSelf: 'flex-start',
+                        color: BRAND.primary,
+                        py: 0.5,
+                        px: 1,
+                        textTransform: 'none',
+                        fontWeight: 600,
+                        '&:hover': {
+                            bgcolor: alpha(BRAND.primary, 0.05),
+                            // textDecoration: 'underline'
+                        }
+                    }}
+                >
+                    Explore Details
+                </Button>
+            </Card>
+        </motion.div>
+    );
+};
+
+// --- MAIN SERVICES COMPONENT ---
+const Services = () => {
+
+    return (
+        <Box
+            component="section"
+            sx={{
+                // Increased vertical padding for more professional spacing
+                py: { xs: 10, sm: 12, md: 15 }, 
+                background: '#f7f9fc', 
+            }}
+        >
+            <Container maxWidth="xl">
+                {/* Header */}
+                <Box 
+                    sx={{ 
+                        textAlign: 'center',
+                        mx: 'auto',
+                        maxWidth: 'lg'
+                    }}
+                >
+                    <Typography
+                        component="h2"
+                        sx={{
+                            fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
+                            fontWeight: 900,
+                            color: BRAND.primary,
+                            mb: 2,
+                            lineHeight: 1.1,
+                            '& > span': {
+                                color: BRAND.accent
+                            }
+                        }}
+                    >
+                        Our Core <span>Services</span>
+                    </Typography>
+                    <Typography 
+                        sx={{ 
+                            fontSize: { xs: '1.1rem', sm: '1.35rem' },
+                            color: BRAND.textPrimaryDark, // Darker body text
+                            maxWidth: '700px',
+                            mx: 'auto'
+                        }}
+                    >
+                        We provide comprehensive support for startups at every critical stage, from inception to accelerated growth.
+                    </Typography>
+                </Box>
+                
+                {/* Visual Separator (Gap between header and grid) */}
+                <Box sx={{ 
+                    maxWidth: '120px', 
+                    mx: 'auto', 
+                    mt: { xs: 4, md: 5 }, // Gap above separator
+                    mb: { xs: 6, md: 8 }  // Gap below separator
+                }}>
+                    <Divider sx={{ 
+                        bgcolor: BRAND.accent, 
+                        height: 5, 
+                        borderRadius: 2, 
+                        width: '100%', 
+                        mx: 'auto' 
+                    }} />
+                </Box>
+
+                {/* Services Grid */}
+                <Box
+                    sx={{
+                        display: 'grid',
+                        gridTemplateColumns: {
+                            xs: '1fr',
+                            sm: 'repeat(2, 1fr)',
+                            lg: 'repeat(4, 1fr)',
+                        },
+                        gap: { xs: 6, sm: 6, lg: 10 },
+                        maxWidth: '1600px',
+                        mx: 'auto',
+                        //px: {  }
+                    }}
+                >
+                    {servicesData.map((service, idx) => (
+                        <ServiceCard key={service.title} service={service} idx={idx} />
+                    ))}
+                </Box>
+                
+                {/* Call to Action at the bottom */}
+                
+            </Container>
+        </Box>
+    );
 };
 
 export default Services;

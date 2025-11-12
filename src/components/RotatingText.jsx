@@ -1,6 +1,5 @@
 "use client";
 import { forwardRef, useState, useEffect, useCallback } from "react";
-import "../styles/RotatingText.css";
 
 const RotatingText = forwardRef(({ texts, rotationInterval = 2000 }, ref) => {
   const [index, setIndex] = useState(0);

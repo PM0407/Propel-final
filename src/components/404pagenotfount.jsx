@@ -1,5 +1,5 @@
 import React from 'react';
-import "../styles/NotFound.css";
+
 import { Link } from 'react-router-dom';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { Helmet } from 'react-helmet-async';

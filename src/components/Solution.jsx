@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaBriefcase, FaChalkboardTeacher, FaUsers, FaTrophy } from "react-icons/fa";
-import "../styles/Solution.css";
+
 
 const solutions = [
   {

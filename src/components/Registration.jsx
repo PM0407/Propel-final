@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import "../styles/Registration.css";
+
 
 const stepsData = [
   { number: 1, title: "Name Reservation", description: "Reserve your company name via MCA RUN." },
