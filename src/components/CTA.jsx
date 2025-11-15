@@ -52,7 +52,7 @@ const CTA = () => {
                 overflow: "hidden",
             }}
         >
-            <Container maxWidth="xl">
+            <Container maxWidth="x">
                 <motion.div
                     initial={{ opacity: 0, y: 60 }} 
                     whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +76,7 @@ const CTA = () => {
                         {/* Inner Floating Panel: White Content Area */}
                         <Card
                             sx={{
-                                width: { xs: '100%', md: '90%' },
+                                width: { xs: '1z00%', md: '90%' },
                                 background: white,
                                 borderRadius: 4,
                                 p: { xs: 4, md: 6, lg: 8 },

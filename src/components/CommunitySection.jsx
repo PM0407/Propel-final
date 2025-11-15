@@ -22,13 +22,13 @@ import networkingImg from "../assets/networking.png"; // Placeholder path
 
 // Define the custom color palette
 const CUSTOM_COLORS = {
-    deepBlue: "#120f8f",    // Primary
-    actionRed: "#fd3007",   // Used in CTA Gradient start
+    deepBlue: "#120f8f",    // Primary
+    actionRed: "#fd3007",   // Used in CTA Gradient start
     ethicsOrange: "#fe883f", // Highlight for Titles/Chip/Accents
-    lightGray: "#f8fafd",   // Outer section background
-    cardBg: "#ffffff",      // Inner card background
-    darkText: "#212121",    // Primary text color
-    subtleText: "#606060",  // Muted text color
+    lightGray: "#f8fafd",   // Outer section background
+    cardBg: "#ffffff",      // Inner card background
+    darkText: "#212121",    // Primary text color
+    subtleText: "#606060",  // Muted text color
 };
 
 const CommunitySection = () => {
@@ -55,18 +55,22 @@ const CommunitySection = () => {
             sx={{
                 width: "100%",
                 background: sectionBg,
-                py: { xs: 8, md: 12 },
+                // FIX 1: Reduced vertical padding on the main section
+                py: { xs: 6, md: 10 }, 
                 overflow: "hidden",
             }}
         >
-            <Container maxWidth="xl" sx={{ overflow: "visible" }}>
+            {/* FIX 2: Reduced max width of the primary container */}
+            <Container maxWidth="l" sx={{ overflow: "visible" }}>
                 <Box
                     sx={{
-                        width: { xs: "96%", sm: "90%", md: "90%" },
+                        // FIX 3: Reduced width of the inner white card/box
+                        width: { xs: "96%", sm: "90%", md: "85%" }, 
                         mx: "auto",
                         borderRadius: 4,
-                        px: { xs: 3, sm: 4, md: 8 },
-                        py: { xs: 6, md: 8 },
+                        // FIX 4: Reduced padding inside the white box
+                        px: { xs: 3, sm: 4, md: 6 }, 
+                        py: { xs: 5, md: 7 },
                         background: cardBg,
                         boxShadow: `0 24px 60px ${alpha(primary, 0.15)}`,
                         position: "relative",
@@ -76,7 +80,8 @@ const CommunitySection = () => {
                 >
                     <Grid 
                         container 
-                        spacing={{ xs: 5, md: 10 }} 
+                        // Reduced spacing
+                        spacing={{ xs: 4, md: 8 }} 
                         alignItems="center"
                     >
                         {/* 1. Content and CTA Column */}
@@ -94,7 +99,8 @@ const CommunitySection = () => {
                                         fontWeight: 900, 
                                         color: darkText,
                                         lineHeight: 1.1,
-                                        fontSize: { xs: '1.8rem', sm: '2.5rem', md: '3rem' }
+                                        // Slight reduction in font size for a smaller overall feel
+                                        fontSize: { xs: '1.7rem', sm: '2.3rem', md: '2.8rem' } 
                                     }}
                                 >
                                     Join Our Thriving{" "}
@@ -109,9 +115,9 @@ const CommunitySection = () => {
                                         mt: 1.5,
                                         color: subtleText,
                                         maxWidth: 700,
-                                        fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
+                                        fontSize: { xs: "0.9rem", sm: "1rem", md: "1.05rem" }, // Slight reduction
                                         lineHeight: 1.6,
-                                        mb: 3, // Added margin bottom for spacing before CTAs
+                                        mb: 3, 
                                     }}
                                 >
                                     Connect with innovative founders, expert mentors, and skilled builders. Engage in curated events, dynamic peer circles, and hands‑on workshops designed to accelerate your startup journey and foster meaningful collaborations.
@@ -119,7 +125,7 @@ const CommunitySection = () => {
 
                                 <Stack
                                     direction={{ xs: "column", sm: "row" }}
-                                    spacing={2.5}
+                                    spacing={2} // Slight reduction in spacing
                                     sx={{ mt: 2, alignItems: { xs: "stretch", sm: "center" } }}
                                 >
                                     <Button
@@ -129,12 +135,11 @@ const CommunitySection = () => {
                                         endIcon={<ArrowForwardIcon />}
                                         sx={{
                                             borderRadius: "999px",
-                                            px: { xs: 4, sm: 3.5 },
-                                            py: { xs: 1.5, sm: 1.25 },
+                                            px: { xs: 3.5, sm: 3 },
+                                            py: { xs: 1.25, sm: 1.15 }, // Slight reduction in button height
                                             textTransform: "uppercase",
                                             fontWeight: 800,
-                                            minWidth: 200,
-                                            // Gradient consistent with the image look
+                                            minWidth: 20,
                                             background: `#fd3007`, 
                                             color: white,
                                             boxShadow: `0 12px 30px ${alpha(accent, 0.4)}`,
@@ -155,8 +160,8 @@ const CommunitySection = () => {
                                         variant="outlined"
                                         sx={{
                                             borderRadius: "999px",
-                                            px: { xs: 4, sm: 3 },
-                                            py: { xs: 1.5, sm: 1.15 },
+                                            px: { xs: 3, sm: 2.5 },
+                                            py: { xs: 1.25, sm: 1.15 }, // Slight reduction in button height
                                             textTransform: "uppercase",
                                             fontWeight: 700,
                                             borderColor: alpha(primary, 0.3),
@@ -183,12 +188,12 @@ const CommunitySection = () => {
                                 sx={{
                                     position: "relative",
                                     width: "100%",
-                                    height: { xs: 280, sm: 350, md: 450, lg: 420 }, // Ensures images have enough space
+                                    // FIX 5: Reduced max height of the image cluster container
+                                    height: { xs: 260, sm: 320, md: 400, lg: 380 }, 
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
                                     overflow: "visible",
-                                    // Removed horizontal padding here to allow full utilization of the grid space
                                 }}
                                 aria-hidden
                             >
@@ -196,12 +201,12 @@ const CommunitySection = () => {
                                 <Box
                                     sx={{
                                         position: "absolute",
-                                        width: { xs: 200, sm: 300, md: 400, lg: 450 },
-                                        height: { xs: 200, sm: 300, md: 400, lg: 450 },
+                                        // Reduced blob size
+                                        width: { xs: 180, sm: 280, md: 350, lg: 400 },
+                                        height: { xs: 180, sm: 280, md: 350, lg: 400 },
                                         borderRadius: "50%",
-                                        // Colors consistent with the image style
                                         background: `radial-gradient(circle at 30% 30%, ${alpha(primary, 0.3)} 0%, transparent 45%), radial-gradient(circle at 70% 70%, ${alpha(highlight, 0.4)} 0%, transparent 45%)`,
-                                        filter: "blur(35px) saturate(120%)",
+                                        filter: "blur(30px) saturate(120%)", // Slight reduction in blur
                                         transform: "translateY(-10px) scale(0.98)",
                                         zIndex: 1,
                                         opacity: 0.9,
@@ -211,7 +216,7 @@ const CommunitySection = () => {
                                 {/* Container for image positioning */}
                                 <Box
                                     sx={{
-                                        position: "absolute", // Use absolute positioning relative to parent Box
+                                        position: "absolute", 
                                         width: "100%",
                                         height: "100%",
                                         top: 0,
@@ -232,23 +237,25 @@ const CommunitySection = () => {
                                         transition={{ duration: 0.5 }}
                                         style={{
                                             position: "absolute",
-                                            left: isSm ? 50 : (isMd ? 30 : -40), // Adjusted positioning for better centering
-                                            top: isSm ? 10 : (isMd ? 10 : 10),
+                                            // Adjusted position
+                                            left: isSm ? 40 : (isMd ? 10 : -30), 
+                                            top: isSm ? 5 : (isMd ? 5 : 5),
                                             zIndex: 2,
                                             pointerEvents: "auto",
                                         }}
                                     >
                                         <Box
                                             component="img"
-                                            src={mentoringImg} // Replace with actual component or image URL
+                                            src={mentoringImg} 
                                             alt="Mentoring sessions"
                                             sx={{
-                                                width: { xs: 160, sm: 220, md: 260, lg: 300 },
-                                                height: { xs: 110, sm: 140, md: 170, lg: 200 },
+                                                // Reduced image size
+                                                width: { xs: 150, sm: 200, md: 240, lg: 280 },
+                                                height: { xs: 100, sm: 130, md: 160, lg: 180 },
                                                 objectFit: "cover",
                                                 borderRadius: 2.5,
                                                 boxShadow: `0 24px 50px ${alpha(primary, 0.2)}`,
-                                                border: `10px solid ${cardBg}`,
+                                                border: `8px solid ${cardBg}`, // Reduced border size
                                             }}
                                         />
                                     </motion.div>
@@ -262,7 +269,7 @@ const CommunitySection = () => {
                                         transition={{ duration: 0.5, delay: 0.1 }}
                                         style={{
                                             position: "absolute",
-                               bottom: isSm ? 10 : (isMd ? 20 : 30),
+                                            bottom: isSm ? 5 : (isMd ? 15 : 20),
                                             left: isSm ? 5 : (isMd ? 10 : 20),
                                             zIndex: 3,
                                             pointerEvents: "auto",
@@ -270,28 +277,29 @@ const CommunitySection = () => {
                                     >
                                         <Box
                                             component="img"
-                                            src={networkingImg} // Replace with actual component or image URL
+                                            src={networkingImg} 
                                             alt="Networking event"
                                             sx={{
-                                                width: { xs: 180, sm: 250, md: 300, lg: 340 },
-                                                height: { xs: 120, sm: 160, md: 190, lg: 220 },
+                                                // Reduced image size
+                                                width: { xs: 170, sm: 230, md: 280, lg: 320 },
+                                                height: { xs: 110, sm: 150, md: 180, lg: 200 },
                                                 objectFit: "cover",
                                                 borderRadius: 2.5,
                                                 boxShadow: `0 30px 65px ${alpha(accent, 0.25)}`,
-                                                border: `10px solid ${cardBg}`,
+                                                border: `8px solid ${cardBg}`, // Reduced border size
                                             }}
                                         />
                                     </motion.div>
                                 </Box>
 
-                                {/* Floating Tiny CTA (positioned relative to the Grid item, not the image box) */}
+                                {/* Floating Tiny CTA (Chip) */}
                                 <Box
                                     sx={{
                                         position: "absolute",
-                                        // Positioned at the bottom center of the column area for balance
                                         left: '50%',
-                                        bottom: { xs: -16, sm: -24, md: -30, lg: -40 }, 
-                                        transform: 'translateX(-50%)', // Center horizontally
+                                        // Adjusted bottom position relative to the smaller box height
+                                        bottom: { xs: -12, sm: -18, md: -25, lg: -30 }, 
+                                        transform: 'translateX(-50%)', 
                                         zIndex: 4,
                                         pointerEvents: "none",
                                     }}
@@ -310,17 +318,18 @@ const CommunitySection = () => {
                                             clickable
                                             sx={{
                                                 fontWeight: 800,
-                                                fontSize: { xs: '0.8rem', sm: '0.9rem', md: '1rem' },
-                                                bgcolor: highlight, // Chip background in Ethics Orange
+                                                // Reduced font size
+                                                fontSize: { xs: '0.75rem', sm: '0.85rem', md: '0.95rem' },
+                                                bgcolor: highlight, 
                                                 color: white,
-                                                py: { xs: 1, sm: 1.5 },
+                                                py: { xs: 0.75, sm: 1 }, // Reduced padding
                                                 px: { xs: 1.5, sm: 2 },
                                                 borderRadius: "999px",
                                                 boxShadow: `0 8px 25px ${alpha(highlight, 0.3)}`,
                                                 border: `2px solid ${highlight}`,
                                                 transition: 'transform 0.3s ease-out',
                                                 "&:hover": {
-                                                    bgcolor: primary, // Deep Blue hover
+                                                    bgcolor: primary, 
                                                     transform: "translateY(-4px) rotate(-1deg)",
                                                     color: white,
                                                     '& .MuiChip-icon': {
@@ -328,9 +337,9 @@ const CommunitySection = () => {
                                                     }
                                                 },
                                                 '& .MuiChip-icon': {
-                                                    fontSize: { xs: 20, md: 24 },
+                                                    fontSize: { xs: 18, md: 20 },
                                                     mr: { xs: 0.5, sm: 1 },
-                                                    color: `${white} !important`, // White icons on orange chip
+                                                    color: `${white} !important`,
                                                 }
                                             }}
                                         />

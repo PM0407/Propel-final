@@ -124,7 +124,7 @@ const Hero = () => {
                     spacing={{ xs: 5, md: 8 }}
                     alignItems="center"
                     justifyContent="space-between"
-                    sx={{ maxWidth: '1400px', mx: 'auto' }}
+                    sx={{ maxWidth: '1270px', mx: 'auto' }}
                 >
                     {/* Left: text + actions */}
                     <motion.div

@@ -57,14 +57,14 @@ const Training = () => {
             </Helmet>
 
             <Container maxWidth="xl">
-                <Stack spacing={4} alignItems="center">
+                <Stack spacing={3} alignItems="center">
                     {/* HEADER */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7 }}
-                        style={{ width: "100%", textAlign: "center", maxWidth: 'lg' }}
+                        style={{ width: "90%", textAlign: "center", maxWidth: 'lg' }}
                     >
                         <Typography
                             component="h2"
@@ -98,7 +98,7 @@ const Training = () => {
                         direction={{ xs: "column", md: "row" }}
                         spacing={5}
                         alignItems="center"
-                        sx={{ width: "100%", mt: { xs: 5, md: 8 } }}
+                        sx={{ width: "90%", mt: { xs: 5, md: 8 } }}
                     >
                         {/* LEFT COLUMN: Image */}
                         <motion.div
