@@ -15,7 +15,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import RocketLaunchOutlined from "@mui/icons-material/RocketLaunchOutlined";
-import log1 from "./assets/"
+import log1 from "../assets/logo.png"
 // Placeholder assets for local imports
 const images = [
     "https://placehold.co/800x450/121490/ffffff?text=Strategy+%26+Compliance",
