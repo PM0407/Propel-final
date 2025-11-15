@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-
+import logo from "../assets/logo.png"; // Local logo import (will be replaced with URL)
 // --- BRAND COLOR PALETTE (Defined to ensure consistency across all files) ---
 const BRAND = {
     primary: "#121490", // Deep Blue
@@ -26,7 +26,6 @@ const BRAND = {
 };
 
 // URL for the uploaded logo image (replaces local import)
-const LOGO_URL = "https://www.propelfoundry.com/assets/img3-DNdea8ax.png"; 
 
 const Header = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -139,7 +138,7 @@ const Header = () => {
                     <Link to="/home" style={{ textDecoration: "none" }}>
                         <Box
                             component="img"
-                            src={LOGO_URL}
+                            src={logo}
                             alt="Propel Foundry Logo"
                             sx={{
                                 width: { xs: 130, md: 180 }, // Adjust size for visibility
@@ -192,7 +191,7 @@ const Header = () => {
                         {/* Mobile Drawer Logo */}
                         <Box
                             component="img"
-                            src={LOGO_URL}
+                            src={logo}
                             alt="Propel Foundry Logo"
                             sx={{ width: 150 }}
                         />

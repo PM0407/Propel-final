@@ -21,6 +21,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import RocketLaunchOutlined from "@mui/icons-material/RocketLaunchOutlined";
 import LOGO_IMAGE_URL from "../assets/img2.png"; // URL for the logo image
+import logo from "../assets/logo.png"; // Local logo import (will be replaced with URL)
 // --- BRAND COLOR PALETTE (Clean Neutral Theme) ---
 const BRAND = {
     primary: "#121490",        // Deep Blue (Main Text/Links)
@@ -100,7 +101,7 @@ const Footer = () => {
                                    <Box>
                                <Box
                                         component="img"
-                                        src={LOGO_IMAGE_URL} 
+                                        src={logo} 
                                         alt="Propel Foundry Logo"
                                         sx={{ 
                                             // FIX: Increased height for more visual prominence

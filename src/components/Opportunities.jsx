@@ -11,9 +11,10 @@ import {
     CardContent,
     CardMedia,
     Chip,
-    Modal, // Import Modal
-    IconButton, // Import IconButton
+    Modal, 
+    IconButton, 
     Divider,
+    Grid, // Used for the new 2-column modal layout
 } from "@mui/material";
 
 import { 
@@ -23,20 +24,23 @@ import {
     FlareOutlined,
     ScienceOutlined,
     CodeOutlined,
-    CloseOutlined, // Close icon for the modal
-    CheckCircleOutline, // New icon for success highlights
+    CloseOutlined, 
+    CheckCircleOutline, 
+    LiveTv, // Icon for Live status
+    TimerOutlined, // Icon for Upcoming status
 } from "@mui/icons-material";
 
 // --- BRAND COLOR PALETTE ---
 const BRAND = {
     primary: "#121490", 
     accent: "#fd3007", 
-    lightBg: "#eef5ff", // Used for Modal background
+    lightBg: "#eef5ff", 
     secondaryAccent: "#007bff", 
     textPrimaryDark: "#1a1a1a", 
+    success: "#10b981", // Added for live status
 };
 
-// --- OPPORTUNITIES DATA (Remains the same) ---
+// --- OPPORTUNITIES DATA (Data remains the same) ---
 const opportunitiesData = {
     funding: [
         { id: 1, title: "SeedSpark 2025", 
@@ -44,28 +48,28 @@ const opportunitiesData = {
             organisedBy: "Propel Foundry Labs", deadline: "November 30, 2025",
             description: "Get your startup off the ground with SeedSpark’s seed funding round.",
             details: ["Up to ₹50 Lakhs in seed capital.", "3-month mentorship cohort.", "Open to tech startups in AI/SaaS."],
-            icon: <FlareOutlined />, category: "Funding"
+            icon: <FlareOutlined />, category: "Funding", url: "https://example.com/seedspark"
         },
         { id: 2, title: "Blue Ocean VC Challenge", 
             image: "https://placehold.co/800x450/007bff/ffffff?text=VC+Challenge",
             organisedBy: "Blue Ocean Ventures", deadline: "December 10, 2025",
             description: "Pitch your scalable business idea to global investors.",
             details: ["Funding up to $250,000.", "Global exposure to Silicon Valley VCs.", "Focus on sustainable and disruptive technology."],
-            icon: <FlareOutlined />, category: "Funding"
+            icon: <FlareOutlined />, category: "Funding", url: "https://example.com/blueocean"
         },
         { id: 3, title: "Ignite Founders Grant", 
             image: "https://placehold.co/800x450/fd3007/ffffff?text=Founders+Grant",
             organisedBy: "Ignite India Foundation", deadline: "January 5, 2026",
             description: "Aimed at supporting women-led startups and social entrepreneurs.",
             details: ["Grants up to ₹15 lakhs (non-dilutive).", "Specifically for women-led and social impact ventures.", "Includes 6 months of tailored business coaching."],
-            icon: <FlareOutlined />, category: "Grant"
+            icon: <FlareOutlined />, category: "Grant", url: "https://example.com/ignite"
         },
         { id: 4, title: "TechElevate Innovation Drive", 
             image: "https://placehold.co/800x450/505050/ffffff?text=Innovation+Drive",
             organisedBy: "Propel Foundry Innovation Cell", deadline: "December 22, 2025",
             description: "For tech startups building AI or IoT-based solutions.",
             details: ["Seed capital + 1-year free incubation.", "Focus on deep tech: AI/IoT solutions.", "Access to university R&D labs."],
-            icon: <FlareOutlined />, category: "Funding"
+            icon: <FlareOutlined />, category: "Funding", url: "https://example.com/techelevate"
         },
     ],
     hackathon: [
@@ -74,28 +78,28 @@ const opportunitiesData = {
             organisedBy: "TechVerse", deadline: "November 20, 2025",
             description: "A 48-hour coding challenge for developers and designers to build AI-powered sustainable solutions.",
             details: ["48-hour non-stop challenge.", "Total prize pool of $10,000 USD.", "Theme: AI for Sustainable Development."],
-            icon: <CodeOutlined />, category: "Hackathon"
+            icon: <CodeOutlined />, category: "Hackathon", url: "https://example.com/innovatex"
         },
         { id: 6, title: "SmartCity Challenge", 
             image: "https://placehold.co/800x450/fd3007/ffffff?text=Smart+City",
             organisedBy: "TechNext Coimbatore", deadline: "December 8, 2025",
             description: "Join developers worldwide to create smart urban innovations. Theme: Smart Mobility and Energy.",
             details: ["Focus on Smart Mobility and Energy.", "Direct access to city planners for pilots.", "Winners get ₹5 lakhs for proof-of-concept."],
-            icon: <CodeOutlined />, category: "Challenge"
+            icon: <CodeOutlined />, category: "Challenge", url: "https://example.com/smartcity"
         },
         { id: 7, title: "CodeSprint 2.0", 
             image: "https://placehold.co/800x450/007bff/ffffff?text=Code+Sprint",
             organisedBy: "National Coding Network", deadline: "January 15, 2026",
             description: "National-level hackathon for students to showcase coding, design, and AI creativity.",
             details: ["Prizes up to ₹2 lakhs.", "Exclusive for student participants.", "Internship opportunities with corporate sponsors."],
-            icon: <CodeOutlined />, category: "Hackathon"
+            icon: <CodeOutlined />, category: "Hackathon", url: "https://example.com/codesprint"
         },
         { id: 8, title: "EcoTech HackFest", 
             image: "https://placehold.co/800x450/909090/ffffff?text=Eco+Tech",
             organisedBy: "Green Tech Association", deadline: "February 1, 2026",
             description: "Focuses on environmental sustainability through technology.",
             details: ["Dedicated track for environmental tech.", "Includes mentorship from leading environmental scientists.", "Pilot partnership opportunities."],
-            icon: <CodeOutlined />, category: "Hackathon"
+            icon: <CodeOutlined />, category: "Hackathon", url: "https://example.com/ecotech"
         },
     ],
     research: [
@@ -104,33 +108,34 @@ const opportunitiesData = {
             organisedBy: "AI Research Council", deadline: "November 25, 2025",
             description: "Collaborate with top universities on machine learning and computer vision projects.",
             details: ["Fully funded 6-month fellowship.", "Focus on ML and Computer Vision.", "Publication support in Tier 1 journals."],
-            icon: <ScienceOutlined />, category: "Fellowship"
+            icon: <ScienceOutlined />, category: "Fellowship", url: "https://example.com/airesearch"
         },
         { id: 10, title: "GreenTech Paper Submission", 
             image: "https://placehold.co/800x450/fd3007/ffffff?text=GreenTech+Paper",
             organisedBy: "International GreenTech Conference", deadline: "December 18, 2025",
             description: "Submit your paper on sustainable energy innovations to the International Conference on GreenTech, 2025 edition.",
             details: ["International conference publication opportunity.", "Focus area: Sustainable Energy Innovation.", "Travel and accommodation stipend provided."],
-            icon: <ScienceOutlined />, category: "Submission"
+            icon: <ScienceOutlined />, category: "Submission", url: "https://example.com/greentechpaper"
         },
         { id: 11, title: "NextGen Innovation Symposium", 
             image: "https://placehold.co/800x450/007bff/ffffff?text=Innovation+Symposium",
             organisedBy: "NextGen Research Hub", deadline: "January 30, 2026",
             description: "A platform for young researchers to present their findings in robotics, healthcare AI, and IoT technologies.",
             details: ["Showcase findings to global faculty.", "Themes: Robotics, Healthcare AI, IoT.", "Best papers receive cash prizes."],
-            icon: <ScienceOutlined />, category: "Symposium"
+            icon: <ScienceOutlined />, category: "Symposium", url: "https://example.com/nextgen"
         },
         { id: 12, title: "QuantumTech Scholars Program", 
             image: "https://placehold.co/800x450/505050/ffffff?text=Quantum+Scholars",
             organisedBy: "QuantumTech Labs", deadline: "February 15, 2026",
             description: "Research program dedicated to quantum computing and cryptography.",
             details: ["Stipend and lab resources included.", "Dedicated to Quantum Computing and Cryptography.", "Collaboration with industry partners."],
-            icon: <ScienceOutlined />, category: "Program"
+            icon: <ScienceOutlined />, category: "Program", url: "https://example.com/quantumtech"
         },
     ],
 };
 
-// --- DETAIL MODAL COMPONENT ---
+
+// --- DETAIL MODAL COMPONENT (REFINED) ---
 const OpportunityDetailModal = ({ item, handleClose }) => {
     if (!item) return null;
 
@@ -142,6 +147,30 @@ const OpportunityDetailModal = ({ item, handleClose }) => {
     } else if (item.category.includes("Research") || item.category.includes("Fellowship")) {
         color = BRAND.primary;
     }
+
+    // --- LIVE/UPCOMING STATUS LOGIC ---
+    const deadlineDate = new Date(item.deadline);
+    const now = new Date();
+    // Consider "Live" if deadline is within the next 30 days AND not passed
+    const isLive = deadlineDate > now && (deadlineDate.getTime() - now.getTime() < (30 * 24 * 60 * 60 * 1000)); 
+    const isPastDeadline = now > deadlineDate;
+
+    let statusLabel = 'UPCOMING';
+    let statusColor = BRAND.secondaryAccent;
+    let statusIcon = <TimerOutlined sx={{ color: 'white', fontSize: 20 }} />;
+
+    if (isPastDeadline) {
+        statusLabel = 'CLOSED';
+        statusColor = BRAND.textPrimaryDark; // Darker color for closed
+        statusIcon = <CloseOutlined sx={{ color: 'white', fontSize: 20 }} />;
+    } else if (isLive) {
+        statusLabel = 'LIVE NOW';
+        statusColor = BRAND.success; // Green for live
+        statusIcon = <LiveTv sx={{ color: 'white', fontSize: 20 }} />;
+    }
+    
+    const daysRemaining = isPastDeadline ? 0 : Math.ceil((deadlineDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+
 
     return (
         <Modal open={!!item} onClose={handleClose} closeAfterTransition>
@@ -158,97 +187,167 @@ const OpportunityDetailModal = ({ item, handleClose }) => {
                     boxShadow: 24,
                     overflowY: 'auto',
                     outline: 'none',
+                    display: 'flex', // Use flex for column layout on mobile, row on desktop
+                    flexDirection: { xs: 'column', md: 'row' },
                 }}
             >
+                {/* Close Button - positioned outside the grid for better flexibility */}
                 <IconButton
                     onClick={handleClose}
                     sx={{
-                        position: 'sticky',
-                        top: 10,
-                        right: 10,
+                        position: 'absolute',
+                        top: { xs: 10, md: 16 },
+                        right: { xs: 10, md: 16 },
                         zIndex: 10,
                         bgcolor: 'white',
                         boxShadow: 3,
                         '&:hover': { bgcolor: BRAND.lightBg },
+                        border: `1px solid ${alpha(BRAND.textPrimaryDark, 0.1)}`
                     }}
                 >
                     <CloseOutlined color="action" />
                 </IconButton>
 
-                {/* Media and Header */}
-                <CardMedia
-                    component="img"
-                    height="250"
-                    image={item.image}
-                    alt={item.title}
-                    sx={{ objectFit: 'cover' }}
-                />
+                {/* Left Column: Image/Media */}
+                <Box sx={{ 
+                    flex: { xs: '0 0 100%', md: '0 0 50%' }, // 100% width on mobile, 50% on desktop
+                    position: 'relative',
+                    minHeight: { xs: 200, md: 'auto' }, // Min height for image on small screens
+                    borderRadius: { xs: '12px 12px 0 0', md: '12px 0 0 12px' }, // Rounded corners
+                    overflow: 'hidden', // Ensure image respects border radius
+                }}>
+                    <CardMedia
+                        component="img"
+                        image={item.image}
+                        alt={item.title}
+                        sx={{ 
+                            objectFit: 'cover', 
+                            height: '100%', // Take full height of parent box
+                            width: '100%',
+                            display: 'block', // Ensure no extra space below image
+                        }}
+                    />
+                </Box>
 
-                <CardContent sx={{ p: { xs: 3, md: 5 } }}>
-                    <Stack direction="row" justifyContent="space-between" alignItems="flex-start" mb={2}>
-                        <Typography
-                            variant="h4"
-                            component="h2"
-                            sx={{ fontWeight: 800, color: BRAND.textPrimaryDark, lineHeight: 1.2 }}
-                        >
-                            {item.title}
-                        </Typography>
-                        <Chip
-                            label={item.category}
-                            sx={{ bgcolor: alpha(color, 0.15), color: color, fontWeight: 700, fontSize: '0.9rem' }}
-                        />
-                    </Stack>
+                {/* Right Column: Details */}
+                <Box sx={{ 
+                    flex: { xs: '0 0 100%', md: '0 0 50%' }, // 100% width on mobile, 50% on desktop
+                    p: { xs: 3, md: 5 }, 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    justifyContent: 'center', // Vertically center content if space allows
+                    textAlign: { xs: 'center', md: 'left' } // Center text on mobile
+                }}>
+                            
+                    {/* Status Indicator */}
+                    <Chip
+                        icon={statusIcon}
+                        label={statusLabel}
+                        sx={{ 
+                            bgcolor: statusColor, 
+                            color: 'white', 
+                            fontWeight: 700, 
+                            mb: 2, 
+                            fontSize: '0.85rem',
+                            alignSelf: { xs: 'center', md: 'flex-start' } // Center on mobile, left on desktop
+                        }}
+                    />
 
-                    <Stack direction="row" spacing={4} mb={4} divider={<Divider orientation="vertical" flexItem />}>
+                    {/* Event Title */}
+                    <Typography
+                        variant="h5"
+                        component="h2"
+                        sx={{ fontWeight: 900, color: BRAND.textPrimaryDark, mb: 1.5, lineHeight: 1.2 }}
+                    >
+                        {item.title}
+                    </Typography>
+                    
+                    {/* Category Chip */}
+                    <Chip
+                        label={item.category}
+                        sx={{ 
+                            bgcolor: alpha(color, 0.15), 
+                            color: color, 
+                            fontWeight: 700, 
+                            fontSize: '0.8rem',
+                            mb: 3,
+                            alignSelf: { xs: 'center', md: 'flex-start' } // Center on mobile, left on desktop
+                        }}
+                    />
+
+                    <Divider sx={{ mb: 3 }} />
+
+                    {/* Organized By */}
+                    <Stack 
+                        direction={{ xs: 'column', sm: 'row' }} 
+                        alignItems={{ xs: 'center', sm: 'flex-start' }} 
+                        spacing={{ xs: 0.5, sm: 1 }} 
+                        mb={1.5}
+                        justifyContent={{ xs: 'center', md: 'flex-start' }}
+                    >
                         <Stack direction="row" alignItems="center" spacing={1}>
                             <AccountBalanceOutlined sx={{ color: BRAND.primary, fontSize: '1.2rem' }} />
-                            <Typography variant="body2">
-                                **Organized by:** {item.organisedBy}
+                            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                                Organized by:
+                            </Typography>
+                        </Stack>
+                        <Typography variant="body1" color="text.secondary">
+                            {item.organisedBy}
+                        </Typography>
+                    </Stack>
+                    
+                    {/* Deadline */}
+                    <Stack 
+                        direction={{ xs: 'column', sm: 'row' }} 
+                        alignItems={{ xs: 'center', sm: 'flex-start' }} 
+                        spacing={{ xs: 0.5, sm: 1 }} 
+                        mb={3}
+                        justifyContent={{ xs: 'center', md: 'flex-start' }}
+                    >
+                        <Stack direction="row" alignItems="center" spacing={1}>
+                            <CalendarTodayOutlined sx={{ color: BRAND.accent, fontSize: '1.2rem' }} />
+                            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                                Deadline:
                             </Typography>
                         </Stack>
                         <Stack direction="row" alignItems="center" spacing={1}>
-                            <CalendarTodayOutlined sx={{ color: BRAND.accent, fontSize: '1.2rem' }} />
-                            <Typography variant="body2" sx={{ fontWeight: 700, color: BRAND.accent }}>
-                                Deadline: {item.deadline}
+                            <Typography variant="body1" sx={{ fontWeight: 700, color: BRAND.accent }}>
+                                {item.deadline}
                             </Typography>
+                            {daysRemaining > 0 && 
+                                <Chip 
+                                    label={`${daysRemaining} Days Left`} 
+                                    size="small" 
+                                    color="warning" 
+                                    sx={{ ml: 1, height: 20, fontWeight: 700 }}
+                                />
+                            }
                         </Stack>
                     </Stack>
                     
-                    <Divider sx={{ mb: 4 }} />
+                    <Divider sx={{ mb: 3 }} />
 
-                    {/* Detailed Description */}
-                    <Typography variant="body1" sx={{ color: BRAND.textPrimaryDark, lineHeight: 1.7, mb: 4 }}>
-                        {item.description}
-                    </Typography>
-
-                    {/* Key Highlights/Details */}
-                    {item.details && (
-                        <Box mb={4}>
-                            <Typography variant="h6" sx={{ fontWeight: 700, color: BRAND.primary, mb: 2 }}>
-                                Key Highlights
+                    {/* Description - Simplified and optional */}
+                    {item.description && (
+                        <Box mb={3}>
+                            <Typography variant="h6" sx={{ fontWeight: 700, color: BRAND.primary, mb: 1.5 }}>
+                                About the Opportunity
                             </Typography>
-                            <Stack spacing={1.5}>
-                                {item.details.map((detail, index) => (
-                                    <Stack key={index} direction="row" spacing={1} alignItems="flex-start">
-                                        <CheckCircleOutline sx={{ color: color, fontSize: '1.2rem', mt: '2px' }} />
-                                        <Typography variant="body1" color="text.secondary">
-                                            {detail}
-                                        </Typography>
-                                    </Stack>
-                                ))}
-                            </Stack>
+                            <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                                {item.description}
+                            </Typography>
                         </Box>
                     )}
+
 
                     {/* Final CTA Button */}
                     <Button
                         variant="contained"
                         fullWidth
                         endIcon={<LaunchOutlined />}
-                        // Replace with actual external link if available
-                        onClick={() => console.log('Applying to:', item.title)}
+                        onClick={() => window.open(item.url || '#', '_blank')}
                         sx={{
-                            mt: 2,
+                            mt: 'auto', // Push to bottom of available space
                             py: 1.5,
                             bgcolor: BRAND.accent,
                             color: 'white',
@@ -259,16 +358,16 @@ const OpportunityDetailModal = ({ item, handleClose }) => {
                             '&:hover': { bgcolor: BRAND.primary }
                         }}
                     >
-                        Apply Now & Secure Your Spot
+                        Apply Now
                     </Button>
-                </CardContent>
+                </Box>
             </Box>
         </Modal>
     );
 };
 
 
-// --- CARD COMPONENT (Updated to handle Modal open) ---
+// --- CARD COMPONENT (Streamlined) ---
 const OpportunityCard = ({ item, index, handleCardClick }) => {
     let color = BRAND.primary;
     if (item.category.includes("Funding") || item.category.includes("Grant")) {
@@ -288,7 +387,7 @@ const OpportunityCard = ({ item, index, handleCardClick }) => {
         >
             <Card
                 elevation={6}
-                onClick={() => handleCardClick(item)} // Handle click on card
+                onClick={() => handleCardClick(item)} 
                 sx={{
                     height: '100%',
                     borderRadius: 3,
@@ -298,12 +397,12 @@ const OpportunityCard = ({ item, index, handleCardClick }) => {
                     borderBottom: `6px solid ${color}`, 
                     cursor: 'pointer',
                     '&:hover': {
-                        transform: 'translateY(-8px)', // Increased lift
-                        boxShadow: `0 18px 50px ${alpha(color, 0.35)}`, // Enhanced shadow
+                        transform: 'translateY(-8px)', 
+                        boxShadow: `0 18px 50px ${alpha(color, 0.35)}`,
                     }
                 }}
             >
-                {/* Media Section */}
+                {/* Media Section (Image Only) */}
                 <CardMedia
                     component="img"
                     height="180"
@@ -312,75 +411,34 @@ const OpportunityCard = ({ item, index, handleCardClick }) => {
                     sx={{ objectFit: 'cover' }}
                 />
 
-                {/* Content Section */}
-                <CardContent sx={{ p: { xs: 2, sm: 3 }, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                {/* Content Section (Title and Category Only) */}
+                <CardContent sx={{ p: { xs: 2, sm: 3 }, flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                     
-                    {/* Title and Chip */}
-                    <Stack 
-                        direction="row" 
-                        justifyContent="space-between" 
-                        alignItems="flex-start" 
-                        mb={1.5}
-                    >
-                        <Typography
-                            component="h3"
-                            sx={{
-                                fontSize: { xs: '1.25rem', sm: '1.5rem' },
-                                fontWeight: 800, // Slightly bolder title
-                                color: BRAND.textPrimaryDark,
-                                lineHeight: 1.2
-                            }}
-                        >
-                            {item.title}
-                        </Typography>
-                        <Chip
-                            label={item.category}
-                            size="small"
-                            sx={{
-                                bgcolor: alpha(color, 0.15),
-                                color: color,
-                                fontWeight: 700,
-                                fontSize: '0.75rem',
-                                borderRadius: 1,
-                                px: 1,
-                                mt: 0.5
-                            }}
-                        />
-                    </Stack>
-
-                    {/* Description */}
                     <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        mb={2}
-                        sx={{ fontSize: '0.95rem', lineHeight: 1.5 }}
-                    >
-                        {item.description.substring(0, 100)}...
-                    </Typography>
-
-                    {/* Metadata: Org and Deadline */}
-                   
-
-                    {/* View Details Button (Non-functional, stylistic link) */}
-                    <Button
-                        variant="text"
-                        fullWidth
-                        onClick={(e) => { e.stopPropagation(); handleCardClick(item); }} // Explicitly open modal
-                        endIcon={<LaunchOutlined />}
+                        component="h3"
                         sx={{
-                            mt: 1,
-                            color: BRAND.primary,
-                            textTransform: 'uppercase',
-                            fontWeight: 700,
-                            '&:hover': {
-                                bgcolor: alpha(BRAND.primary, 0.05),
-                                color: BRAND.accent,
-                            }
+                            fontSize: { xs: '1.25rem', sm: '1.5rem' },
+                            fontWeight: 800,
+                            color: BRAND.textPrimaryDark,
+                            lineHeight: 1.2,
+                            textAlign: 'center', 
+                            mb: 1
                         }}
                     >
-                        View Full Details
-                    </Button>
-
+                        {item.title}
+                    </Typography>
+                    <Chip
+                        label={item.category}
+                        size="small"
+                        sx={{
+                            bgcolor: alpha(color, 0.15),
+                            color: color,
+                            fontWeight: 700,
+                            fontSize: '0.75rem',
+                            borderRadius: 1,
+                            px: 1,
+                        }}
+                    />
                 </CardContent>
             </Card>
         </motion.div>
@@ -391,7 +449,7 @@ const OpportunityCard = ({ item, index, handleCardClick }) => {
 // --- MAIN OPPORTUNITIES COMPONENT ---
 const Opportunities = () => {
     const [activeTab, setActiveTab] = useState("funding");
-    const [selectedOpportunity, setSelectedOpportunity] = useState(null); // State for modal
+    const [selectedOpportunity, setSelectedOpportunity] = useState(null); 
 
     const handleCardClick = (item) => {
         setSelectedOpportunity(item);
@@ -518,7 +576,6 @@ const Opportunities = () => {
                     ))}
                 </Box>
 
-                {/* Global CTA */}
                
             </Container>
 
