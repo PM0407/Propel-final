@@ -124,7 +124,7 @@ const Contact = () => {
                 <Typography
                     variant="h4"
                     component="h3"
-                    sx={{ fontWeight: 800, mb: 3, color: BRAND.accent }}
+                    sx={{ fontWeight: 800, mb: 3, color: BRAND.lightBg }}
                 >
                     Connect Instantly
                 </Typography>
@@ -149,12 +149,12 @@ const Contact = () => {
                     {/* Email */}
                     <Stack direction="row" alignItems="center" spacing={1}>
                         <EmailOutlined sx={{ color: 'white', fontSize: '1.5rem' }} />
-                        <Typography variant="body1" sx={{ color: BRAND.accent, fontWeight: 700 }}>support@propelfoundry.com</Typography>
+                        <Typography variant="body1" sx={{ color: BRAND.lightBg, fontWeight: 700 }}>support@propelfoundry.com</Typography>
                     </Stack>
                     {/* Phone */}
                     <Stack direction="row" alignItems="center" spacing={1}>
                         <PhoneOutlined sx={{ color: 'white', fontSize: '1.5rem' }} />
-                        <Typography variant="body1" sx={{ color: BRAND.accent, fontWeight: 700 }}>+91 99943 40054</Typography>
+                        <Typography variant="body1" sx={{ color: BRAND.lightBg, fontWeight: 700 }}>+91 99943 40054</Typography>
                     </Stack>
                     
                     {/* 🚀 MOVED SOCIAL LINKS HERE 🚀 */}
@@ -176,7 +176,7 @@ const Contact = () => {
                                 >
                                     <Icon sx={{ 
                                         fontSize: '2rem', 
-                                        color: BRAND.accent, 
+                                        color: BRAND.lightBg, 
                                         transition: 'color 0.2s', 
                                         // Ensure hover is visible (accent to white on dark primary background)
                                         '&:hover': { color: 'white' } 
