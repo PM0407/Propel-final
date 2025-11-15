@@ -32,7 +32,7 @@ const Training = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     // Placeholder URL for image since local asset imports are not supported
-    const growthImage = "https://www.propelfoundry.com/assets/growth-CRs3Obmy.jpg";
+    const growthImage = img;
 
     return (
         <Box

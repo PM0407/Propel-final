@@ -66,7 +66,7 @@ const Footer = () => {
             sx={{
                 // Overall Section Background (Soft Neutral Anchor)
                 background: softBg, 
-                py: { xs: 8, md: 10 }, 
+                py: { xs: 5, md: 1 }, 
                 position: "relative",
             }}
         >
@@ -74,14 +74,14 @@ const Footer = () => {
                 <title>Propel Foundry | Connect & Support</title>
             </Helmet>
 
-            <Container maxWidth="xl">
+            <Container maxWidth="l">
                 {/* Inner Floating/Anchored Card (Pure White for Clarity) */}
                 <Box
                     sx={{
                         background: white,
                         borderRadius: 3,
                         boxShadow: `0 15px 40px ${alpha(primary, 0.1)}`,
-                        p: { xs: 4, md: 6 },
+                        p: { xs: 1, md: 5 },
                         borderBottom: `4px solid ${accent}`, // Primary accent border
                     }}
                 >

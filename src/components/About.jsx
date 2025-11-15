@@ -28,8 +28,8 @@ import {
 
 // --- BRAND COLOR PALETTE (Copied for consistency) ---
 const BRAND = {
-    primary: "#121490", 
-    accent: "#fd3007", 
+    primary: "#121490", // Deep Blue
+    accent: "#fd3007", // Primary Accent Red/Orange
     lightBg: "#f7f9fc", 
     secondaryAccent: "#007bff", 
     textPrimaryDark: "#1a1a1a", 
@@ -94,7 +94,7 @@ const About = () => {
                 sx={{
                     background: BRAND.primary, // Deep blue background
                     color: 'white',
-                    py: { xs: 15, sm: 10, md: 18 },
+                    py: { xs: 1, sm: 10, md: 15 },
                     textAlign: 'center',
                 }}
             >
@@ -288,26 +288,40 @@ const About = () => {
                                             position: 'relative',
                                         }}
                                     >
-                                        {/* Dot & Year (Desktop positioning) */}
+                                        {/* DOT & YEAR: Updated to Blue dot inside Orange ring */}
                                         <Box 
                                             sx={{
                                                 position: 'absolute',
-                                                left: { xs: '0', sm: isLeft ? '50%' : '50%' },
-                                                transform: { xs: 'none', sm: `translate${isLeft ? 'X(-17px)' : 'X(-17px)'}` },
-                                                width: 34, height: 34,
-                                                bgcolor: BRAND.accent,
+                                                left: { xs: '0', sm: '50%' },
+                                                // Center horizontally for mobile (left side) and desktop (center line)
+                                                transform: { xs: 'translateY(-50%)', sm: `translate(-50%, -50%)` }, 
+                                                width: 30, // Outer Orange Ring size
+                                                height: 30,
+                                                bgcolor: BRAND.accent, // Outer Orange Ring
                                                 borderRadius: '50%',
-                                                border: `4px solid white`,
+                                                border: `4px solid ${BRAND.lightBg}`, // White border/outline
                                                 zIndex: 1,
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
-                                                boxShadow: `0 0 0 4px ${BRAND.lightBg}`,
+                                                boxShadow: `0 0 0 6px ${BRAND.lightBg}`, // Light shadow for depth
                                             }}
                                         >
-                                            <Typography variant="body2" sx={{ fontWeight: 700, color: 'white' }}>
-                                                {t.year % 100} {/* Show last two digits of year */}
-                                            </Typography>
+                                            <Box 
+                                                sx={{
+                                                    width: 20, 
+                                                    height: 20, 
+                                                    bgcolor: BRAND.primary, // Inner Blue Dot
+                                                    borderRadius: '50%',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Typography variant="caption" sx={{ fontWeight: 700, color: 'white', lineHeight: 1 }}>
+                                                    {t.year % 100} {/* Show last two digits of year */}
+                                                </Typography>
+                                            </Box>
                                         </Box>
                                         
                                         {/* Content Card */}

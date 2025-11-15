@@ -15,14 +15,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import RocketLaunchOutlined from "@mui/icons-material/RocketLaunchOutlined";
-import log1 from "../assets/logo.png"
+import log1 from "../assets/business-growth.jpg";
+import log2 from "../assets/dpiit registration.png";
+import log3 from "../assets/event1.jpg";
+import log4 from "../assets/mentoring.png";
+import log5 from "../assets/networking.png";
 // Placeholder assets for local imports
 const images = [
-    "https://placehold.co/800x450/121490/ffffff?text=Strategy+%26+Compliance",
-    "https://placehold.co/800x450/fd3007/ffffff?text=Mentorship+Network",
-    "https://placehold.co/800x450/007bff/ffffff?text=Growth+Training",
-    "https://placehold.co/800x450/121490/ffffff?text=Funding+Access",
-    "https://placehold.co/800x450/fd3007/ffffff?text=Global+Reach",
+log1,log2,log3,log4,log5
 ];
 
 // --- BRAND COLOR PALETTE (Copied for consistency) ---
@@ -308,19 +308,7 @@ const Hero = () => {
                                     zIndex: 10,
                                 }}
                             >
-                                <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-                                    <Typography sx={{ 
-                                        fontSize: 16, 
-                                        fontWeight: 700, 
-                                        color: BRAND.accent, 
-                                        textTransform: 'uppercase',
-                                        flexShrink: 1,
-                                        minWidth: { xs: 80, sm: 100 }
-                                    }}>
-                                        {/* Dynamic Label for current slide content */}
-                                        {["Strategy", "Mentorship", "Training", "Funding", "Network"][current % images.length]}
-                                    </Typography>
-                                </Box>
+                              
 
                                 {/* Navigation Buttons */}
                                 <Box sx={{ display: "flex", gap: 1 }}>

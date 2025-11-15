@@ -27,28 +27,29 @@ const BRAND = {
     // NEW: Softer Body Text Color for neatness
     textBodyGray: "#4a4a4a",
 };
-
+import img from "../assets/networking.png"
+import img1 from "../assets/startup-team.jpg"
 // --- COMMUNITY DATA (Using high-quality placeholders for images) ---
 const communityData = [
     {
         title: "Startup Community",
         description: "Join a vibrant community of startups, share ideas, get mentorship, and collaborate on innovative projects. This is where innovation sparks and lasting partnerships are forged.",
-        image: "https://www.propelfoundry.com/assets/image-2dtyPoRh.png", 
+        image: img, 
     },
     {
         title: "Mentor Network",
         description: "Connect with experienced mentors who provide tailored guidance, strategic insights, and essential support to help you navigate growth challenges and accelerate your startup's success.",
-        image: "https://www.propelfoundry.com/assets/mentorship-BoYmsxa-.jpg", 
+          image: img1, 
     },
     {
         title: "Student Innovator Hub",
         description: "A platform for aspiring student entrepreneurs to engage with real startups, learn industry skills through workshops, participate in events, and gain invaluable real-world exposure.",
-        image: "https://www.propelfoundry.com/assets/growth-CRs3Obmy.jpg", 
+        image: img, 
     },
     {
         title: "Research Faculty Collaboration",
         description: "Collaborate directly with leading research faculty to explore innovative solutions, join cutting-edge R&D projects, and effectively bridge academic theory with industrial application.",
-        image: "https://www.propelfoundry.com/assets/network-BHBdBEXL.jpg", 
+       image: img1, 
     },
 ];
 

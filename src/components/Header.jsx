@@ -126,7 +126,7 @@ const Header = () => {
                 transition: "all 300ms ease",
             }}
         >
-            <Container maxWidth="xl">
+            <Container maxWidth="lg">
                 <Toolbar
                     disableGutters
                     sx={{
@@ -134,27 +134,31 @@ const Header = () => {
                         py: { xs: 0.5, md: 1 },
                     }}
                 >
-                    {/* Logo (Image) */}
-                    <Link to="/home" style={{ textDecoration: "none" }}>
-                        <Box
-                            component="img"
-                            src={logo}
-                            alt="Propel Foundry Logo"
-                            sx={{
-                                width: { xs: 130, md: 180 }, // Adjust size for visibility
-                                height: "auto",
-                                cursor: "pointer",
-                                transition: "transform 0.25s ease",
-                                "&:hover": { transform: "scale(1.05)" },
-                            }}
-                        />
-                    </Link>
+                    {/* Logo (Image) - FIXED: Wrapped <Link> in <Box> to apply negative margin (ml) */}
+                    <Box sx={{ ml: { xs: -2, md: -9 } }}> 
+                        <Link 
+                            to="/home" 
+                            style={{ textDecoration: "none" }}
+                        >
+                            <Box
+                                component="img"
+                                src={logo}
+                                alt="Propel Foundry Logo"
+                                sx={{
+                                    width: { xs: 150, md: 200 }, 
+                                    height: "auto",
+                                    cursor: "pointer",
+                                    transition: "transform 0.25s ease",
+                                    "&:hover": { transform: "scale(1.05)" },
+                                }}
+                            />
+                        </Link>
+                    </Box>
 
                     {/* Desktop Navigation */}
                     {!isMobile && (
                         <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
                             <NavLinks />
-                     
                         </Box>
                     )}
 
@@ -193,7 +197,7 @@ const Header = () => {
                             component="img"
                             src={logo}
                             alt="Propel Foundry Logo"
-                            sx={{ width: 150 }}
+                            sx={{ width: 180 }}
                         />
                         <IconButton onClick={toggleDrawer(false)}>
                             <CloseIcon />

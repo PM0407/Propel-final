@@ -13,42 +13,46 @@ import Community from "./components/Community";
 import Opportunities from "./components/Opportunities";
 import EventDetail from "./components/EventDetail";
 import NotFound from "./components/404pagenotfount";
-import CommunitySection from "./components/CommunitySection"; // ✅ new import
+import CommunitySection from "./components/CommunitySection"; 
 
 function App() {
-  return (
-    <Router>
-      <Header />
-      <Routes>
-        {/* Redirect root (/) to /home */}
-        <Route path="/" element={<Navigate to="/home" replace />} />
+    return (
+        <Router>
+            <Header />
+            <Routes>
+                {/* FIX 1: Map the home page content only to the root path (/) */}
+                <Route
+                    path="/"
+                    element={
+                        <>
+                            <Hero />
+                            <Training />
+                            <CommunitySection /> 
+                            <CTA />
+                            <FAQ />
+                        </>
+                    }
+                />
 
-        {/* ✅ Landing Page with Community Section preview */}
-        <Route
-          path="/home"
-          element={
-            <>
-              <Hero />
-              <Training />
-              <CommunitySection /> {/* 💫 added preview section */}
-              <CTA />
-              <FAQ />
-            </>
-          }
-        />
+                {/* FIX 2: Remove the separate /home route. 
+                          If any legacy links point to /home, redirect them explicitly to /
+                          This ensures the URL bar always shows the clean root path.
+                */}
+                <Route path="/home" element={<Navigate to="/" replace />} />
 
-        {/* Other Routes */}
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/opportunities" element={<Opportunities />} />
-        <Route path="/event/:id" element={<EventDetail />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </Router>
-  );
+
+                {/* Other Routes */}
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/community" element={<Community />} />
+                <Route path="/opportunities" element={<Opportunities />} />
+                <Route path="/event/:id" element={<EventDetail />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Footer />
+        </Router>
+    );
 }
 
 export default App;

@@ -113,9 +113,10 @@ const ServiceCard = ({ service, idx }) => {
             transition={{ duration: 0.5, delay: idx * 0.1 }}
         >
             <Card
-                elevation={3} // Increased elevation slightly for better depth
+                elevation={10} 
                 sx={{
-                    height: '100%',
+                    // Keeping original height behavior
+                    height: '80%', 
                     background: 'white',
                     borderRadius: 3,
                     p: { xs: 2.5, sm: 4 },
@@ -127,7 +128,7 @@ const ServiceCard = ({ service, idx }) => {
                     justifyContent: 'space-between',
                     '&:hover': {
                         transform: 'translateY(-8px)',
-                        boxShadow: `0 18px 50px ${alpha(BRAND.primary, 0.15)}`, // Enhanced shadow on hover
+                        boxShadow: `0 18px 50px ${alpha(BRAND.primary, 0.15)}`, 
                     },
                 }}
             >
@@ -141,11 +142,11 @@ const ServiceCard = ({ service, idx }) => {
                         >
                             <Avatar
                                 sx={{
-                                    width: 64, // Slightly larger avatar
+                                    width: 64, 
                                     height: 64,
                                     bgcolor: alpha(BRAND.primary, 0.08),
                                     color: BRAND.primary,
-                                    fontSize: '2rem', // Larger icon size
+                                    fontSize: '2rem', 
                                     transition: 'all 0.3s',
                                     '&:hover, .MuiCard-root:hover &': {
                                         bgcolor: BRAND.primary,
@@ -161,7 +162,7 @@ const ServiceCard = ({ service, idx }) => {
                                 sx={{
                                     bgcolor: alpha(chipProps.color, 0.1),
                                     color: chipProps.color,
-                                    fontWeight: 700, // Slightly bolder chip text
+                                    fontWeight: 700, 
                                     fontSize: '0.8rem',
                                     borderRadius: 1.5,
                                     px: 1.5,
@@ -177,7 +178,7 @@ const ServiceCard = ({ service, idx }) => {
                                     fontSize: { xs: '1.3rem', sm: '1.5rem' },
                                     fontWeight: 700,
                                     mb: 1.5,
-                                    color: BRAND.textPrimaryDark, // Darker title color
+                                    color: BRAND.textPrimaryDark, 
                                 }}
                             >
                                 {service.title}
@@ -208,7 +209,6 @@ const ServiceCard = ({ service, idx }) => {
                         fontWeight: 600,
                         '&:hover': {
                             bgcolor: alpha(BRAND.primary, 0.05),
-                            // textDecoration: 'underline'
                         }
                     }}
                 >
@@ -226,82 +226,89 @@ const Services = () => {
         <Box
             component="section"
             sx={{
-                // Increased vertical padding for more professional spacing
                 py: { xs: 10, sm: 12, md: 15 }, 
                 background: '#f7f9fc', 
             }}
         >
-            <Container maxWidth="xl">
-                {/* Header */}
-                <Box 
-                    sx={{ 
-                        textAlign: 'center',
-                        mx: 'auto',
-                        maxWidth: 'lg'
-                    }}
+            {/* FIX 1: Increased max width to 1500px to give more space for the 4 columns */}
+            <Container sx={{ maxWidth: '1500px' }}>
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.1 }}
                 >
-                    <Typography
-                        component="h2"
-                        sx={{
-                            fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
-                            fontWeight: 900,
-                            color: BRAND.primary,
-                            mb: 2,
-                            lineHeight: 1.1,
-                            '& > span': {
-                                color: BRAND.accent
-                            }
-                        }}
-                    >
-                        Our Core <span>Services</span>
-                    </Typography>
-                    <Typography 
+                    {/* Header */}
+                    <Box 
                         sx={{ 
-                            fontSize: { xs: '1.1rem', sm: '1.35rem' },
-                            color: BRAND.textPrimaryDark, // Darker body text
-                            maxWidth: '700px',
-                            mx: 'auto'
+                            textAlign: 'center',
+                            mx: 'auto',
+                            maxWidth: '700px' 
                         }}
                     >
-                        We provide comprehensive support for startups at every critical stage, from inception to accelerated growth.
-                    </Typography>
-                </Box>
-                
-                {/* Visual Separator (Gap between header and grid) */}
-                <Box sx={{ 
-                    maxWidth: '120px', 
-                    mx: 'auto', 
-                    mt: { xs: 4, md: 5 }, // Gap above separator
-                    mb: { xs: 6, md: 8 }  // Gap below separator
-                }}>
-                    <Divider sx={{ 
-                        bgcolor: BRAND.accent, 
-                        height: 5, 
-                        borderRadius: 2, 
-                        width: '100%', 
-                        mx: 'auto' 
-                    }} />
-                </Box>
+                        <Typography
+                            component="h2"
+                            sx={{
+                                fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
+                                fontWeight: 900,
+                                color: BRAND.primary,
+                                mb: 2,
+                                lineHeight: 1.1,
+                                '& > span': {
+                                    color: BRAND.accent
+                                }
+                            }}
+                        >
+                            Our Core <span>Services</span>
+                        </Typography>
+                        <Typography 
+                            sx={{ 
+                                fontSize: { xs: '1.1rem', sm: '1.35rem' },
+                                color: BRAND.textPrimaryDark, 
+                                maxWidth: '700px',
+                                mx: 'auto'
+                            }}
+                        >
+                            We provide comprehensive support for startups at every critical stage, from inception to accelerated growth.
+                        </Typography>
+                    </Box>
+                    
+                    {/* Visual Separator (Gap between header and grid) */}
+                    <Box sx={{ 
+                        maxWidth: '120px', 
+                        mx: 'auto', 
+                        mt: { xs: 4, md: 5 }, 
+                        mb: { xs: 6, md: 8 }  
+                    }}>
+                        <Divider sx={{ 
+                            bgcolor: BRAND.accent, 
+                            height: 5, 
+                            borderRadius: 2, 
+                            width: '100%', 
+                            mx: 'auto' 
+                        }} />
+                    </Box>
 
-                {/* Services Grid */}
-                <Box
-                    sx={{
-                        display: 'grid',
-                        gridTemplateColumns: {
-                            xs: '1fr',
-                            sm: 'repeat(2, 1fr)',
-                            lg: 'repeat(4, 1fr)',
-                        },
-                        gap: { xs: 6, sm: 6, lg: 10 },
-                        maxWidth: '1600px',
-                        mx: 'auto',
-                        //px: {  }
-                    }}
-                >
-                    {servicesData.map((service, idx) => (
-                        <ServiceCard key={service.title} service={service} idx={idx} />
-                    ))}
-                </Box>
+                    {/* Services Grid - Maintaining 4 columns and reducing the gap for wider cards */}
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: {
+                                xs: '2fr',
+                                sm: 'repeat(2, 1fr)',
+                                // Maintaining 4 columns
+                                lg: 'repeat(4, 1fr)', 
+                            },
+                            // FIX 2: Reduced gap on large screens (lg: 10 -> lg: 6)
+                            gap: { xs: 1, sm: 1, lg: 2 }, 
+                            mx: 'auto',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        {servicesData.map((service, idx) => (
+                            <ServiceCard key={service.title} service={service} idx={idx} />
+                        ))}
+                    </Box>
+                </motion.div>
                 
                 {/* Call to Action at the bottom */}
                 
